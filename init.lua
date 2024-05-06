@@ -593,6 +593,9 @@ require('lazy').setup({
           'prettierd',
           'eslint',
         },
+        angularls = {
+          filetypes = { 'angular.html', 'typescript' },
+        },
         --
 
         lua_ls = {

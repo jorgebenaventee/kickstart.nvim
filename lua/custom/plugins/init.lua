@@ -15,4 +15,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-return {}
+return {
+  {
+    'joeveiga/ng.nvim',
+    init = function()
+      local ng = require 'ng'
+      vim.keymap.set('n', '<leader>at', ng.goto_template_for_component, { noremap = true, silent = true, desc = 'Go to template for component' })
+      vim.keymap.set('n', '<leader>aT', ng.get_template_tcb, { noremap = true, silent = true, desc = 'Get template typecheck block' })
+      vim.keymap.set('n', '<leader>ac', ng.goto_component_with_template_file, { noremap = true, silent = true, desc = 'Go to component with template file' })
+    end,
+  },
+}
