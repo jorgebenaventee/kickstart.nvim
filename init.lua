@@ -1,5 +1,5 @@
 --[[
-
+    
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -189,6 +189,16 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Set CTRL+[HJKL] as movement keys in insert mode
+vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move cursor left', remap = false })
+vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move cursor down', remap = false })
+vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move cursor up', remap = false })
+vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move cursor right', remap = false })
+
+-- Treat wrapped lines as multiple lines
+vim.keymap.set({ 'n', 'v' }, 'j', 'gj', { desc = 'Next line', remap = false })
+vim.keymap.set({ 'n', 'v' }, 'k', 'gk', { desc = 'Next line', remap = false })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
