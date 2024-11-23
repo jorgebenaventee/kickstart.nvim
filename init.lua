@@ -1,5 +1,5 @@
 --[[
-    
+
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -591,7 +591,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
+        ts_ls = {
           'prettierd',
           'eslint',
         },
@@ -635,6 +635,7 @@ require('lazy').setup({
         'angularls',
         'cssls',
         'netcoredbg',
+        'coreclr',
         'prettierd',
         'prettier',
         'eslint',
