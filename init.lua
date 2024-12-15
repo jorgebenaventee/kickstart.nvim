@@ -198,6 +198,9 @@ vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move cursor right', remap = fa
 -- Treat wrapped lines as multiple lines
 vim.keymap.set({ 'n', 'v' }, 'j', 'gj', { desc = 'Next line', remap = false })
 vim.keymap.set({ 'n', 'v' }, 'k', 'gk', { desc = 'Next line', remap = false })
+vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
+vim.keymap.set('n', '<space>x', ':.lua<CR>')
+vim.keymap.set('v', '<space>x', ':lua<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
