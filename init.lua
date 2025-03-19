@@ -650,7 +650,6 @@ require('lazy').setup({
         'angularls',
         'cssls',
         'netcoredbg',
-        'coreclr',
         'prettierd',
         'prettier',
         'eslint',
