@@ -47,6 +47,8 @@ return {
         ts_ls = {},
         html = {},
         cssls = {},
+        terraformls = {},
+        rust_analyzer = {},
       }
 
       require('mason').setup()
@@ -102,7 +104,25 @@ return {
     version = '1.*',
     dependencies = { 'rafamadriz/friendly-snippets' },
     opts = {
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+        -- Enter: insert the suggestion at the cursor, keeping any text after it
+        ['<CR>'] = { 'accept', 'fallback' },
+        -- Tab: replace the whole word under the cursor with the suggestion (IntelliJ-style)
+        ['<Tab>'] = {
+          function(cmp)
+            if not cmp.is_visible() then return end
+            local pos = vim.api.nvim_win_get_cursor(0)
+            local row, col = pos[1], pos[2]
+            local line = vim.api.nvim_get_current_line()
+            local trailing = line:sub(col + 1):match '^[%w_]*'
+            if trailing ~= '' then vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col + #trailing, {}) end
+            return cmp.select_and_accept()
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+      },
       appearance = { nerd_font_variant = 'mono' },
       completion = { documentation = { auto_show = true } },
       sources = {
