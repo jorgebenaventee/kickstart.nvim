@@ -95,6 +95,10 @@ return {
     main = 'everforest',
     opts = { italics = true },
   },
+  {
+    'nasccped/rustheme.nvim',
+    priority = 1000,
+  },
   { -- Theme picker with live preview, persists your pick across restarts
     'zaldih/themery.nvim',
     lazy = false,
@@ -114,6 +118,10 @@ return {
           { name = 'Nightfox Duskfox', colorscheme = 'duskfox' },
           { name = 'Onedark', colorscheme = 'onedark' },
           { name = 'Everforest', colorscheme = 'everforest' },
+          { name = 'Rustheme Core Dark', colorscheme = 'rustheme-core-dark' },
+          { name = 'Rustheme Core Light', colorscheme = 'rustheme-core-light' },
+          { name = 'Rustheme Mangrove Dark', colorscheme = 'rustheme-mangrove-dark' },
+          { name = 'Rustheme Mangrove Light', colorscheme = 'rustheme-mangrove-light' },
           'default',
           'habamax',
           'retrobox',
