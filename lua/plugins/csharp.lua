@@ -7,6 +7,9 @@ return {
     'Tastyep/structlog.nvim',
   },
   config = function()
-    require('csharp').setup()
+    -- LSP is handled by roslyn_ls (see lsp.lua); csharp.nvim only wires up the debugger.
+    require('csharp').setup {
+      lsp = { omnisharp = { enable = false } },
+    }
   end,
 }

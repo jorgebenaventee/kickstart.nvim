@@ -28,8 +28,9 @@ return {
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
             map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }, { bufnr = event.buf })
             end, 'Toggle inlay hints')
           end
         end,
@@ -37,14 +38,36 @@ return {
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- omnisharp (C#) is managed by csharp.nvim, jdtls (Java) by nvim-java.
+      -- jdtls (Java) is managed by nvim-java. C# uses roslyn_ls here;
+      -- csharp.nvim only provides the debugger (netcoredbg) now.
       local servers = {
+        roslyn_ls = {},
         lua_ls = {
           settings = {
-            Lua = { completion = { callSnippet = 'Replace' } },
+            Lua = {
+              completion = { callSnippet = 'Replace' },
+              hint = { enable = true },
+            },
           },
         },
-        ts_ls = {},
+        ts_ls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+          },
+        },
         html = {},
         cssls = {},
         terraformls = {},
