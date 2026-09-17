@@ -68,6 +68,7 @@ return {
             },
           },
         },
+        angularls = { workspace_required = true },
         html = {},
         cssls = {},
         terraformls = {},
@@ -80,14 +81,17 @@ return {
       vim.list_extend(ensure_installed, { 'stylua', 'prettierd', 'prettier', 'eslint_d' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      -- mason-lspconfig no longer supports `handlers`; configure servers via
+      -- vim.lsp.config and let its `automatic_enable` (default true) enable them.
+      vim.lsp.config('*', { capabilities = capabilities })
+      for name, opts in pairs(servers) do
+        vim.lsp.config(name, opts)
+      end
+
+      -- Only auto-enable the servers we manage above (e.g. leftover mason
+      -- installs like angularls shouldn't attach to every .ts/.html file).
       require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        automatic_enable = vim.tbl_keys(servers),
       }
     end,
   },
