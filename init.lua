@@ -61,7 +61,7 @@ vim.keymap.set({ 'n', 'v' }, 'k', 'gk', { desc = 'Up (wrapped)' })
 vim.keymap.set('n', '<C-h>', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<C-l>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<C-w>a', '<cmd>%bd|e#|bd#<CR>', { desc = 'Close all buffers but current' })
-vim.keymap.set('n', '<C-F4>', '<cmd>bp|bd #<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bp|bd #<CR>', { desc = 'Close current buffer' })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
